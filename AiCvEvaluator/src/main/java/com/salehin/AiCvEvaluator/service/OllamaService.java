@@ -41,12 +41,14 @@ public class OllamaService {
                     .retrieve()
                     .bodyToMono(JsonNode.class)
                     .block();
-            //String response=
+            String Airesponse=response.get("response")
+                    .asText();
+            CvEvaluationResponse dto= objectMapper.readValue(Airesponse, CvEvaluationResponse.class);
 
+            return dto;
         }catch (Exception e){
             throw new RuntimeException("CV evaluation failed",e);
         }
-    return null;
     }
 
 
